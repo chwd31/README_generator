@@ -81,3 +81,4 @@ You can also find more of my projects on my GitHub page at https://github.com/${
 `;
 }
 
+module.exports = generateMarkdown;
