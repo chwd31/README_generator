@@ -1,6 +1,8 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
+const generateMarkdown = require('./generateMarkdown');
+
 
 
 // TODO: Create an array of questions for user input
@@ -19,7 +21,7 @@ const questions = [
         type: 'input',
         name: 'Installation',
         message: "Please provide installation steps for your project",
-    }
+    },
     {
         type: 'input',
         name: 'usage',
@@ -31,42 +33,53 @@ const questions = [
         message: "Please list any contributors to your project",
     },
     {
+        type: 'input',
+        name: 'tests',
+        message: "Please provide test instructions for your project",
+    },
+    {
         type: 'list',
         name: 'license',
         message: "What license do you want to use for your project?",
         choices: ['MIT', 'Apache 2.0', 'GPLv3', 'BSD 3-Clause', 'None'],
+    },
+    {
+        type: 'input',
+        name: 'github',
+        message: "What is your Github username?",
+    },
+    {
+        type: 'input',
+        name: 'email',
+        message: "What is your email address?",
     },
 ];
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
     fs.writeFile(fileName, data, (err) => {
-        if (err) throw err;
-        console.log('README file has been created!');
-      });
+        if (err) {
+            console.error(err);
+        } else {
+            console.log('README file has been created!');
+        }
+    });
 }
 
 // TODO: Create a function to initialize app
 function init() {
-    inquirer
-    .prompt(questions)
-    .then((answers) => {
-      // generate README content based on user input
-      const readmeContent = `# ${answers.title}\n\n` +
-                            `## Description\n\n${answers.description}\n\n` +
-                            `## Installation\n\n${answers.Installation}\n\n` +
-                            `## Usage\n\n${answers.usage}\n\n` +
-                            `## Credits\n\n${answers.credits}\n\n` +
-                            `## License\n\n${answers.license}`;
+    inquirer.prompt(questions).then((answers) => {
+        // generate README content based on user input
+        const markdownContent = generateMarkdown(answers);
 
-      
-      // call the writeToFile function to write the content to a file
-      writeToFile('README.md', readmeContent);
-    })
-    .catch((error) => {
-      console.error(error);
+        // call the writeToFile function to write the content to a file
+        writeToFile('README.md', markdownContent);
+    }).catch((error) => {
+        console.error(error);
     });
 }
+
+  
 
 // Function call to initialize app
 init();
