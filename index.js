@@ -19,7 +19,7 @@ const questions = [
     },
     {
         type: 'input',
-        name: 'Installation',
+        name: 'installation',
         message: "Please provide installation steps for your project",
     },
     {
@@ -42,6 +42,11 @@ const questions = [
         name: 'license',
         message: "What license do you want to use for your project?",
         choices: ['MIT', 'Apache 2.0', 'GPLv3', 'BSD 3-Clause', 'None'],
+    },
+    {
+        type: 'input',
+        name: 'name',
+        message: "What is your name?",
     },
     {
         type: 'input',
