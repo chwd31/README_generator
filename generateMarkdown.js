@@ -66,7 +66,7 @@ ${data.credits}
 
 ## Contributing
 
-${data.credits}
+${data.contribute}
 
 ## Tests
 

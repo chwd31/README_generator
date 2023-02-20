@@ -34,6 +34,11 @@ const questions = [
     },
     {
         type: 'input',
+        name: 'contribute',
+        message: "Please add any instructions on how users can contribute to your project"
+    }
+    {
+        type: 'input',
         name: 'tests',
         message: "Please provide test instructions for your project",
     },
